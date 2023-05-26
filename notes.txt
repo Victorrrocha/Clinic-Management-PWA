@@ -1,0 +1,5 @@
+Name *
+Day of the appointment
+height
+birthday
+telephone

@@ -1,0 +1,26 @@
+{
+  "appointments": [],
+  "patients": [
+    {
+      "id": "1",
+      "name": "Britta Perry",
+      "email": "britta@email.com",
+      "phone": "95 9959-9443",
+      "iconColor": "#ACB1D6"
+    },
+    {
+      "id": "2",
+      "name": "Abed Nadir",
+      "email": "abed@email.com",
+      "phone": "95 9959-9443",
+      "iconColor": "#87CBB9"
+    },
+    {
+      "id": "3",
+      "name": "Troy Barnes",
+      "email": "troy@email.com",
+      "phone": "95 9959-9443",
+      "iconColor": "#FF6969"
+    }
+  ]
+}

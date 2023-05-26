@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+.section-wrapper {
+  margin-left: 3rem;
+  width: 100%;
+  padding: 1rem 2rem;
+}
+
+.main {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+.section-wrapper h1 {
+  animation: .8s forwards fadeIn;
+}
+
+.section-wrapper .main {
+  animation: .5s forwards fadeIn;
+  animation-delay: 200ms;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.btn {
+  max-width: 300px;
+  width: 100%;
+  padding: 10px 15px;
+  border: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background-color: white;
+  border-radius: 10px;
+  transition: all 100ms ease-in;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:focus {
+  transform: translateY(0px);
+}
+
+.btn.action {
+  width: 100%;
+  background-color: #19A7CE;
+  color: white;
+  font-size: 1rem;
+}
+

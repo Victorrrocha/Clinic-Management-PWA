@@ -1,0 +1,89 @@
+section {
+    width: 100%;
+    display: grid;
+    grid-template-columns: [col-start] 1fr [col-1] 1fr [col-end];
+    grid-template-rows: [row-start] auto [row-1] 1fr [row-end];
+    row-gap: 2rem;
+    column-gap: 2rem;
+}
+
+.header-item {
+    grid-row-start: row-start;
+    grid-row-end: row-1;
+    grid-column-start: col-start;
+    grid-column-end: col-1;
+}
+
+.formItem {
+    grid-row-start: row-1;
+    grid-row-end: row-end;
+    grid-column-start: col-start;
+    grid-column-end: col-1;
+}
+
+.patientFilterItem {
+    grid-row-start: row-1;
+    grid-row-end: row-end;
+    grid-column-start: col-1;
+    grid-column-end: col-end;
+}
+
+.formSectionTitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    row-gap: 20px;
+}
+
+.formSection {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.errorMessage {
+    font-size: .8rem;
+    color: #E06469;
+    animation: 1s forwards callAttention;
+}
+
+@keyframes callAttention {
+    0% {
+        transform: translateX(-5px);
+    }
+    10% {
+        transform: translateX(5px);
+    }
+    20% {
+        transform: translateX(-5px);
+    }
+    30% {
+        transform: translateX(5px);
+    }
+    40% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+    60% {
+        transform: translateX(-5px);
+    }
+    70% {
+        transform: translateX(5px);
+    }
+    80% {
+        transform: translateX(-5px);
+    }
+    90% {
+        transform: translateX(5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}

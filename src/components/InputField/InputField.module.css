@@ -1,0 +1,29 @@
+.formSectionTitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.errorMessage {
+    font-size: .8rem;
+    color: #E06469;
+    animation: 1s forwards callAttention;
+}
+
+.formSection {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+input {
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+    padding: 5px 10px !important;
+    font-size: 1rem;
+    outline: none;
+}
+
+input:focus {
+    border-bottom: 1px solid #5C469C;
+    border-color: #5C469C;
+}

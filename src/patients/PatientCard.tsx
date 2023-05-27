@@ -8,7 +8,7 @@ export interface Patient {
     iconColor: string
 }
 
-export function PatientCard({patient}: { patient: Patient}) {
+export function PatientCard({patient, onSelecting}: { patient: Patient, onSelecting?: Function}) {
 
     const getInitials = (name: string): string => {
         const initials = name
@@ -20,8 +20,14 @@ export function PatientCard({patient}: { patient: Patient}) {
         return initials;
     }
 
+    const handleSeleting = () => {
+        if (onSelecting) {
+            onSelecting(patient);
+        }
+    }
+
     return(
-        <div className={`btn ${styles.patientCard}`}>
+        <div className={`btn ${styles.patientCard}`} onClick={handleSeleting}>
             <div className={styles.patientIcon} style={{ backgroundColor: patient.iconColor}}>{getInitials(patient.name)}</div>
 
             <div className={styles.infoContainer}>

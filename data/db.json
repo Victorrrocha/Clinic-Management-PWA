@@ -1,26 +1,40 @@
 {
-  "appointments": [],
+  "appointments": [
+    {
+      "clientId": "1",
+      "clinicId": ""
+    }
+  ],
   "patients": [
     {
       "id": "1",
       "name": "Britta Perry",
       "email": "britta@email.com",
-      "phone": "95 9959-9443",
+      "phone": "99599443",
       "iconColor": "#ACB1D6"
     },
     {
       "id": "2",
       "name": "Abed Nadir",
       "email": "abed@email.com",
-      "phone": "95 9959-9443",
+      "phone": "99599443",
       "iconColor": "#87CBB9"
     },
     {
       "id": "3",
       "name": "Troy Barnes",
       "email": "troy@email.com",
-      "phone": "95 9959-9443",
+      "phone": "99599443",
       "iconColor": "#FF6969"
+    }
+  ],
+  "clinic" : [
+    {
+      "cnpj": "12790745000180",
+      "contact": "95999998888",
+      "location": "",
+      "Description": "",
+      "Permission": ""
     }
   ]
 }

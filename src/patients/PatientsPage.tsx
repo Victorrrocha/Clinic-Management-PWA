@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { PatientCard } from "./PatientCard";
+import { getPatients } from "../services/patients";
 
 function PatientsPage() {
 
@@ -15,17 +15,11 @@ function PatientsPage() {
     const [patients, setPatients] = useState([]);
 
     useEffect(() => {
-        async function getPatients() {
-            const response = await axios.get('http://localhost:3000/patients');
-            const returnPatients = response.data;
-            setPatients(returnPatients);
-        }
-        try{
-            getPatients();
-        }
-        catch(error) {
-            console.log(error);
-        }
+        getPatients()
+        .then(data => {
+            setPatients(data);
+        })
+        .catch(errors => console.log(errors))
     }, [])
 
     return (

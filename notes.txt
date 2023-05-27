@@ -1,5 +1,7 @@
-Name *
-Day of the appointment
-height
-birthday
-telephone
+how to tackel the date selection
+
+click on day in the calendar => get Date obj
+query the backend to see the appoitment on that day
+return all appoitments
+
+see available hours

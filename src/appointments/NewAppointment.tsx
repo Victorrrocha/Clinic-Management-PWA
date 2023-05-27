@@ -2,22 +2,34 @@ import { useState } from "react";
 
 import styles from "./NewAppointment.module.css";
 import { PatientsList } from "./PatientsList";
+import { SearchPatients } from "./SearchPatients.observer";
 import { Formik, Form, FormikProps } from "formik";
 import InputField from "../components/InputField/InputField";
 import { AppointmentHour } from "../components/styled/AppointmentHour";
+import { PatientIdentifiedTag } from "./components/PatientIdentifiedTag";
 
 import "react-day-picker/dist/style.css";
 import { DayPicker } from "react-day-picker";
+import { IPatient } from "../interfaces/IPatient";
 
-const initialForm = {
+export interface IAppointmentForm {
+  name: string,
+  email: string,
+  phoneNumber: string,
+  date: Date,
+}
+
+export const initialForm: IAppointmentForm = {
   name: "",
   email: "",
   phoneNumber: "",
-  date: Date,
+  date: new Date,
 };
 
 function NewAppointment() {
   const [selectedTime, setSelectedTime] = useState("");
+  const [patients, setPatients] = useState([]);
+  const [selectedPatient, setSelectedPatient] = useState<IPatient>();
 
   const onSubmit = (values: any, actions: any) => {
     console.log("Submited");
@@ -48,8 +60,10 @@ function NewAppointment() {
     return errors;
   };
 
+  // Calendar
   const [selected, setSelected] = useState<Date>();
   const [appointments, setAppointments] = useState(0);
+
   let footer = <p>Please pick a day.</p>;
   if (selected) {
     footer = <p>{appointments} appointments today</p>;
@@ -60,6 +74,25 @@ function NewAppointment() {
     setSelected(selected);
     console.log(selected);
   };
+  // calendar
+
+  const handleSearchResponse = (response: any) => {
+    if (!selectedPatient) {
+      setPatients(response);
+    }
+  }
+
+  const handlePickedPatient = (patient: IPatient) => {
+    setSelectedPatient(patient);
+    setPatients([]);
+
+    // If in desktop Load Patient information page
+    // If in mobile see patient information modal button
+  }
+
+  const handleUnselectingPatient = () => {
+    setSelectedPatient(undefined);
+  }
 
   return (
     <section className="section-wrapper">
@@ -75,7 +108,8 @@ function NewAppointment() {
             <Form onSubmit={props.handleSubmit}>
               <div className={styles.formSection}>
                 <p className={styles.formSectionTitle}>Patient</p>
-                <InputField name="name" placeholder="Name" type="text" />
+                {selectedPatient && <PatientIdentifiedTag name={selectedPatient.name} onUnselect={handleUnselectingPatient}/>}
+                <InputField className={selectedPatient && "hidden"} name="name" placeholder="Name" type="text" selectedPatient={selectedPatient}/>
               </div>
               <div className={styles.formSection}>
                 <p className={styles.formSectionTitle}>Contact</p>
@@ -86,11 +120,12 @@ function NewAppointment() {
                       Inform at least one
                     </p>
                   )}
-                <InputField name="email" placeholder="E-mail" type="email" />
+                <InputField name="email" placeholder="E-mail" type="email" selectedPatient={selectedPatient}/>
                 <InputField
                   name="phoneNumber"
                   placeholder="Phone Number"
                   validateImmediately={true}
+                  selectedPatient={selectedPatient}
                 />
               </div>
               
@@ -112,6 +147,7 @@ function NewAppointment() {
                       {Array.from({ length: 8 }, (_, i) => i + 8).map((hour) => {
                         return (
                           <AppointmentHour
+                            key={hour}
                             onClick={() => {
                               setSelectedTime(hour.toString());
                             }}
@@ -129,13 +165,15 @@ function NewAppointment() {
               <button className="btn action" type="submit">
                 Create
               </button>
+
+              <SearchPatients searchResponse={handleSearchResponse} />
             </Form>
           )}
         </Formik>
       </div>
 
       <div className={`main ${styles.patientFilterItem}`}>
-        <PatientsList />
+        <PatientsList patients={patients} onPickingPatient={handlePickedPatient}/>
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ import styled from "styled-components";
 function SideMenu() {
     
     const Nav = styled.nav`
-        background-color: #A4D0A4;
+        background-color: #79E0EE;
         min-width: 250px;
         height: 100vh;
         display: flex;

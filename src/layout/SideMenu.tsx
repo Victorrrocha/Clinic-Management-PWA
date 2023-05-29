@@ -1,41 +1,35 @@
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { AiOutlineCalendar, AiFillPushpin, AiOutlineUser } from "react-icons/ai";
+import style from './SideMenu.module.css';
 
 function SideMenu() {
-    
-    const Nav = styled.nav`
-        background-color: #79E0EE;
-        min-width: 250px;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 0 2.6px;
-    `
-
-    const Ul = styled.ul`
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        row-gap: 15px;
-        color: #000;
-    `
 
     return (
-        <Nav>
-            <Ul>
-                <li>
-                    <NavLink to={'calendar'}>Calendar</NavLink>
+        <nav className={style.nav}>
+            <ul className={style.ul}>
+                <li className="pl-10">
+                    <NavLink to={'calendar'} className={({isActive}) => isActive ? "text-white" : ""}> 
+                        <span className="flex items-center gap-x-2">
+                            <AiOutlineCalendar size={30} /> Calendar
+                        </span>
+                    </NavLink>
                 </li>
-                <li>
-                    <NavLink to={'new-appointment'}>New Appointment</NavLink>
+                <li className="pl-10">
+                    <NavLink to={'new-appointment'} className={({isActive}) => isActive ? "text-white" : ""}>
+                        <span className="flex items-center gap-x-2">
+                            <AiFillPushpin size={30} /> New Appointment
+                        </span>
+                    </NavLink>
                 </li>
-                <li>
-                    <NavLink to={'patients'}>Patients</NavLink>
+                <li className="pl-10">
+                    <NavLink to={'patients'} className={({isActive}) => isActive ? "text-white" : ""}>
+                        <span className="flex items-center gap-x-2">
+                            <AiOutlineUser size={30} /> Patients
+                        </span>
+                    </NavLink>
                 </li>
-            </Ul>
-        </Nav>
+            </ul>
+        </nav>
     )
 }
 

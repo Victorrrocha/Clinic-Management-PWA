@@ -3,8 +3,14 @@ section {
     display: grid;
     grid-template-columns: [col-start] 1fr [col-1] 1fr [col-end];
     grid-template-rows: [row-start] auto [row-1] 1fr [row-end];
-    row-gap: 2rem;
+    row-gap: 1rem;
     column-gap: 2rem;
+}
+
+@media screen and (max-width: 1024px) {
+    section {
+        grid-template-columns: [col-start] 1fr [col-1];
+    }
 }
 
 .header-item {

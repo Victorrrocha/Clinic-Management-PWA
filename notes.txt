@@ -5,3 +5,6 @@ query the backend to see the appoitment on that day
 return all appoitments
 
 see available hours
+
+when i create an appoitment
+all i need are information of the appoitment and the patient id

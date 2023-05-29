@@ -1,0 +1,22 @@
+.nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #537188;
+  min-width: 250px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(100, 100, 100, 0.25) 1.95px 0 2.6px;
+}
+
+.ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  color: #000;
+}

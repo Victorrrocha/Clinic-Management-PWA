@@ -1,7 +1,9 @@
+import { PageHeader } from "../components/PageHeader";
+
 function CalendarPage() {
     return (
         <div className="section-wrapper">
-            <h1>Calendar Page</h1>
+            <PageHeader title="Calendar Page" />
         </div>
     )
 }

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { PatientCard } from "./PatientCard";
-import { getPatients } from "../services/patients";
+import { usePatients } from "../hooks/usePatients";
+import { PageHeader } from "../components/PageHeader";
 
 function PatientsPage() {
 
@@ -12,19 +12,11 @@ function PatientsPage() {
         flex-wrap: wrap;
     `
 
-    const [patients, setPatients] = useState([]);
-
-    useEffect(() => {
-        getPatients()
-        .then(data => {
-            setPatients(data);
-        })
-        .catch(errors => console.log(errors))
-    }, [])
+    const patients = usePatients();
 
     return (
         <div className="section-wrapper">
-            <h1>Patients Page</h1>
+            <PageHeader title="Patients Page" />
 
             <div className="main">
                 <ListContainer>

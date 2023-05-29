@@ -5,12 +5,11 @@ import { PatientsList } from "./PatientsList";
 import { SearchPatients } from "./SearchPatients.observer";
 import { Formik, Form, FormikProps } from "formik";
 import InputField from "../components/InputField/InputField";
-import { AppointmentHour } from "../components/styled/AppointmentHour";
 import { PatientIdentifiedTag } from "./components/PatientIdentifiedTag";
 
-import "react-day-picker/dist/style.css";
-import { DayPicker } from "react-day-picker";
 import { IPatient } from "../interfaces/IPatient";
+import { PageHeader } from "../components/PageHeader";
+import { DatePickerField } from "./components/DatePickerField";
 
 export interface IAppointmentForm {
   name: string,
@@ -27,7 +26,6 @@ export const initialForm: IAppointmentForm = {
 };
 
 function NewAppointment() {
-  const [selectedTime, setSelectedTime] = useState("");
   const [patients, setPatients] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState<IPatient>();
 
@@ -57,24 +55,12 @@ function NewAppointment() {
       errors.phoneNumber = "Invalid phone number";
     }
 
+    if (!values.date) { // validate if a time was set
+      errors.date = "Select a date"
+    }
+
     return errors;
   };
-
-  // Calendar
-  const [selected, setSelected] = useState<Date>();
-  const [appointments, setAppointments] = useState(0);
-
-  let footer = <p>Please pick a day.</p>;
-  if (selected) {
-    footer = <p>{appointments} appointments today</p>;
-  }
-
-  const handleSelected = (selected: any) => {
-    setAppointments(Math.floor(Math.random() * (9 - 0 + 1) + 0));
-    setSelected(selected);
-    console.log(selected);
-  };
-  // calendar
 
   const handleSearchResponse = (response: any) => {
     if (!selectedPatient) {
@@ -85,9 +71,6 @@ function NewAppointment() {
   const handlePickedPatient = (patient: IPatient) => {
     setSelectedPatient(patient);
     setPatients([]);
-
-    // If in desktop Load Patient information page
-    // If in mobile see patient information modal button
   }
 
   const handleUnselectingPatient = () => {
@@ -96,7 +79,7 @@ function NewAppointment() {
 
   return (
     <section className="section-wrapper">
-      <h1 className="text-2xl font-bold">New Appointment</h1>
+      <PageHeader title="New Appointment"/>
 
       <div className={`main ${styles.formItem}`}>
         <Formik
@@ -131,35 +114,7 @@ function NewAppointment() {
               
               <div>
                 <p className={styles.formSectionTitle}>Date</p>
-                <div className="flex items-start">
-                  {/* Data Picker */}
-                  <DayPicker
-                    mode="single"
-                    selected={selected}
-                    onSelect={handleSelected}
-                    footer={footer}
-                  />
-
-                  {/* Confirm time */}
-                  <div className="flex flex-col gap-y-2">
-                    <h3 className="text-lg font-medium">Available Hours: </h3>
-                    <div className="flex gap-1 flex-wrap">
-                      {Array.from({ length: 8 }, (_, i) => i + 8).map((hour) => {
-                        return (
-                          <AppointmentHour
-                            key={hour}
-                            onClick={() => {
-                              setSelectedTime(hour.toString());
-                            }}
-                            $selected={selectedTime == hour.toString()}
-                          >
-                            {hour}:00
-                          </AppointmentHour>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
+                <DatePickerField name="date" />
               </div>
 
               <button className="btn action" type="submit">
@@ -172,7 +127,7 @@ function NewAppointment() {
         </Formik>
       </div>
 
-      <div className={`main ${styles.patientFilterItem}`}>
+      <div className={`main hidden md:block ${styles.patientFilterItem}`}>
         <PatientsList patients={patients} onPickingPatient={handlePickedPatient}/>
       </div>
     </section>

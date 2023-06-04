@@ -18,11 +18,12 @@ export function DatePickerField(props: FieldHookConfig<string>) {
     footer = <p>{appointments} appointments today</p>;
   }
 
-  const handleSelectDate = (val: any) => {
-    setFieldValue(field.name, val);
+  const handleSelectDate = (val: Date | undefined) => {
+    setFieldValue(field.name, val?.toLocaleString());
+
     setAppointments(Math.floor(Math.random() * (9 - 0 + 1) + 0));
     setSelected(val);
-    console.log(val);
+    console.log(val?.toLocaleString());
   };
 
   const handleAppointmentHour = (hour: string) => {
@@ -32,7 +33,8 @@ export function DatePickerField(props: FieldHookConfig<string>) {
       setSelectedTime("");
     }
     selected?.setHours(+hour);
-    setFieldValue(field.name, selected);
+    console.log(selected);
+    setFieldValue(field.name, selected?.toLocaleString());
   };
 
   return (
@@ -42,7 +44,7 @@ export function DatePickerField(props: FieldHookConfig<string>) {
         {...props}
         {...field}
         mode="single"
-        selected={(field.value && new Date(field.value)) || null}
+        selected={(field.value && new Date(field.value)) || undefined}
         onSelect={handleSelectDate}
         footer={footer}
       />

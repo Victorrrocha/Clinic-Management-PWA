@@ -11,21 +11,25 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/react-router": "^5.1.20",
     "axios": "^1.4.0",
     "date-fns": "^2.30.0",
     "formik": "^2.2.9",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
+    "react-big-calendar": "^1.6.9",
     "react-day-picker": "^8.7.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.9.0",
+    "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.1",
     "styled-components": "^6.0.0-rc.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.6",
+    "@types/react-big-calendar": "^1.6.4",
     "@types/react-dom": "^18.2.4",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",

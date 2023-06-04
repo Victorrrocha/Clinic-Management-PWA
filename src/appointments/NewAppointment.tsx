@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAppDispatch } from "../app/hooks";
+import { addNewAppointment } from "./appointmentsSlice";
 
 import styles from "./NewAppointment.module.css";
 import { PatientsList } from "./PatientsList";
@@ -10,32 +12,30 @@ import { PatientIdentifiedTag } from "./components/PatientIdentifiedTag";
 import { IPatient } from "../interfaces/IPatient";
 import { PageHeader } from "../components/PageHeader";
 import { DatePickerField } from "./components/DatePickerField";
+import { IAppointment } from "../interfaces/IAppointment";
 
-export interface IAppointmentForm {
-  name: string,
-  email: string,
-  phoneNumber: string,
-  date: Date,
-}
-
-export const initialForm: IAppointmentForm = {
+export const initialForm: IAppointment = {
+  id: "",
+  patientId: "",
   name: "",
   email: "",
   phoneNumber: "",
-  date: new Date,
+  date: "",
 };
 
 function NewAppointment() {
   const [patients, setPatients] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState<IPatient>();
+  const dispatch = useAppDispatch();
 
-  const onSubmit = (values: any, actions: any) => {
-    console.log("Submited");
-
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      actions.setSubmitting(false);
-    }, 1000);
+  const onSubmit = async (values: IAppointment, actions: any) => {
+    if (selectedPatient) {
+      values.patientId = selectedPatient.id;
+    }
+    await dispatch(addNewAppointment(values)).unwrap();
+    actions.setSubmitting(false);
+    actions.resetForm(initialForm);
+    setSelectedPatient(undefined);
   };
 
   const validate = (values: any) => {
@@ -55,8 +55,9 @@ function NewAppointment() {
       errors.phoneNumber = "Invalid phone number";
     }
 
-    if (!values.date) { // validate if a time was set
-      errors.date = "Select a date"
+    if (!values.date) {
+      // validate if a time was set
+      errors.date = "Select a date";
     }
 
     return errors;
@@ -66,20 +67,20 @@ function NewAppointment() {
     if (!selectedPatient) {
       setPatients(response);
     }
-  }
+  };
 
   const handlePickedPatient = (patient: IPatient) => {
     setSelectedPatient(patient);
     setPatients([]);
-  }
+  };
 
   const handleUnselectingPatient = () => {
     setSelectedPatient(undefined);
-  }
+  };
 
   return (
     <section className="section-wrapper">
-      <PageHeader title="New Appointment"/>
+      <PageHeader title="New Appointment" />
 
       <div className={`main ${styles.formItem}`}>
         <Formik
@@ -87,48 +88,72 @@ function NewAppointment() {
           onSubmit={onSubmit}
           validate={validate}
         >
-          {(props: FormikProps<any>) => (
-            <Form onSubmit={props.handleSubmit}>
-              <div className={styles.formSection}>
-                <p className={styles.formSectionTitle}>Patient</p>
-                {selectedPatient && <PatientIdentifiedTag name={selectedPatient.name} onUnselect={handleUnselectingPatient}/>}
-                <InputField className={selectedPatient && "hidden"} name="name" placeholder="Name" type="text" selectedPatient={selectedPatient}/>
-              </div>
-              <div className={styles.formSection}>
-                <p className={styles.formSectionTitle}>Contact</p>
-                {props.submitCount > 0 &&
-                  props.values.email === "" &&
-                  props.values.phoneNumber === "" && (
-                    <p className={styles.errorMessage} role="alert">
-                      Inform at least one
-                    </p>
+          {(props: FormikProps<any>) => {
+            if (props.isSubmitting) {
+              return <p>Is Submitting</p>;
+            }
+            return (
+              <Form onSubmit={props.handleSubmit}>
+                <div className={styles.formSection}>
+                  <p className={styles.formSectionTitle}>Patient</p>
+                  {selectedPatient && (
+                    <PatientIdentifiedTag
+                      name={selectedPatient.name}
+                      onUnselect={handleUnselectingPatient}
+                    />
                   )}
-                <InputField name="email" placeholder="E-mail" type="email" selectedPatient={selectedPatient}/>
-                <InputField
-                  name="phoneNumber"
-                  placeholder="Phone Number"
-                  validateImmediately={true}
-                  selectedPatient={selectedPatient}
-                />
-              </div>
-              
-              <div>
-                <p className={styles.formSectionTitle}>Date</p>
-                <DatePickerField name="date" />
-              </div>
+                  <InputField
+                    className={selectedPatient && "hidden"}
+                    name="name"
+                    placeholder="Name"
+                    type="text"
+                    selectedPatient={selectedPatient}
+                  />
+                </div>
+                <div className={styles.formSection}>
+                  <p className={styles.formSectionTitle}>Contact</p>
+                  {props.submitCount > 0 &&
+                    props.values.email === "" &&
+                    props.values.phoneNumber === "" && (
+                      <p className={styles.errorMessage} role="alert">
+                        Inform at least one
+                      </p>
+                    )}
+                  <InputField
+                    name="email"
+                    placeholder="E-mail"
+                    type="email"
+                    selectedPatient={selectedPatient}
+                  />
+                  <InputField
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    validateImmediately={true}
+                    selectedPatient={selectedPatient}
+                  />
+                </div>
 
-              <button className="btn action" type="submit">
-                Create
-              </button>
+                <div>
+                  <p className={styles.formSectionTitle}>Date</p>
+                  <DatePickerField name="date" />
+                </div>
 
-              <SearchPatients searchResponse={handleSearchResponse} />
-            </Form>
-          )}
+                <button className="btn action" type="submit">
+                  {!selectedPatient ? 'Create Patient and Appointment' : 'Create Appointment'}
+                </button>
+
+                <SearchPatients searchResponse={handleSearchResponse} />
+              </Form>
+            );
+          }}
         </Formik>
       </div>
 
       <div className={`main hidden md:block ${styles.patientFilterItem}`}>
-        <PatientsList patients={patients} onPickingPatient={handlePickedPatient}/>
+        <PatientsList
+          patients={patients}
+          onPickingPatient={handlePickedPatient}
+        />
       </div>
     </section>
   );

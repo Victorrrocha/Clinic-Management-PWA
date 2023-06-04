@@ -17,7 +17,9 @@ a {
 .section-wrapper {
   margin-left: 3rem;
   width: 100%;
+  max-width: 1000px;
   padding: 1rem 2rem;
+  flex: 1;
 }
 
 .main {

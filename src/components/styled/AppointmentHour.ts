@@ -9,6 +9,6 @@ box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 cursor: pointer;
 height: fit-content;
 
-background-color: ${(props) => (props.$selected ? "#4942E4" : "white")};
+background-color: ${(props) => (props.$selected ? "#0079FF" : "white")};
 color: ${(props) => (props.$selected ? "white" : "black")};
 `;

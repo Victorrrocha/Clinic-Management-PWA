@@ -1,8 +1,8 @@
 /**
  * starting code from https://github.com/christopher-caldwell/react-big-calendar-demo.
  */
-import { FC, useEffect, useState } from 'react'
-import { Calendar, dateFnsLocalizer, Event as CalendarEvent } from 'react-big-calendar'
+import { FC, useEffect } from 'react'
+import { Calendar, dateFnsLocalizer, Event } from 'react-big-calendar'
 import withDragAndDrop, { withDragAndDropProps } from 'react-big-calendar/lib/addons/dragAndDrop'
 import format from 'date-fns/format'
 import parse from 'date-fns/parse'

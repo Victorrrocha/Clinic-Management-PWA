@@ -1,44 +1,12 @@
 {
   "appointments": [
     {
-      "id": "Q1RQWH7dOP9iPXWH2cO6y",
-      "patientId": "2",
-      "name": "Abed Nadir",
-      "email": "abed@email.com",
-      "phoneNumber": "99599443",
-      "date": "6/7/2023, 2:00:00 PM"
-    },
-    {
-      "id": "lzXh04bD2Pei6X0FisNuk",
+      "id": "NJjRXaEXzM7QsTsp3ioPQ",
       "patientId": "3",
       "name": "Troy Barnes",
       "email": "troy@email.com",
       "phoneNumber": "99599443",
-      "date": "6/3/2023, 11:00:00 AM"
-    },
-    {
-      "id": "1WZerTB5zbwhXHxZYBuS2",
-      "patientId": "1",
-      "name": "Britta Perry",
-      "email": "britta@email.com",
-      "phoneNumber": "99599443",
-      "date": "6/17/2023, 11:00:00 AM"
-    },
-    {
-      "id": "0fmvETzNBpiY2CpaEsya1",
-      "patientId": "1",
-      "name": "Britta Perry",
-      "email": "britta@email.com",
-      "phoneNumber": "99599443",
-      "date": "6/9/2023, 2:00:00 PM"
-    },
-    {
-      "id": "pudstzJBI2oEZYKEj4tVw",
-      "patientId": "1",
-      "name": "Britta Perry",
-      "email": "britta@email.com",
-      "phoneNumber": "99599443",
-      "date": "6/17/2023, 2:00:00 PM"
+      "date": "6/10/2023, 10:00:00 AM"
     }
   ],
   "patients": [

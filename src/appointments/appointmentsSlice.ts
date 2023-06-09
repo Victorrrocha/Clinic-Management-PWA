@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk, nanoid } from '@reduxjs/toolkit'
+import { RootState } from '../app/store'
 import { IAppointment } from '../interfaces/IAppointment'
 import { getAppointments, postAppointment } from '../services/appointments'
 
@@ -8,7 +9,7 @@ interface AppointmentState {
   error: string | null
 }
 
-const initialState: AppointmentState = { // TODO
+const initialState: AppointmentState = { 
   appointments: [],
   status: 'idle',
   error: null
@@ -46,9 +47,9 @@ const appointmentsSlice = createSlice({
       })
       .addCase(fetchAppointments.fulfilled, (state: AppointmentState, action) => {
         state.status = 'succeeded'
-        state.appointments = state.appointments.concat(action.payload)
+        state.appointments = action.payload
       })
-      .addCase(fetchAppointments.pending, (state: AppointmentState) => {
+      .addCase(fetchAppointments.rejected, (state: AppointmentState) => {
         state.status = 'failed'
         state.error = 'failed to fetch appointments'
       })
@@ -63,3 +64,7 @@ export default appointmentsSlice.reducer
 
 
 // TODO custom selectors
+
+export const selectAllAppointments = (state: RootState) => state.appointments.appointments
+export const getAppointmentStatus = (state: RootState) => state.appointments.status
+export const getAppointmentError = (state: RootState) => state.appointments.error

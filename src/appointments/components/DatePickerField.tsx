@@ -4,6 +4,18 @@ import { DayPicker } from "react-day-picker";
 import { AppointmentHour } from "../../components/styled/AppointmentHour";
 import "react-day-picker/dist/style.css";
 
+const css = `
+  .my-selected:not([disabled]) {
+    font-weight: bold;
+    color: white;
+    background-color: #0079FF;
+  }
+
+  .my-selected:hover:not([disabled]) {
+    background-color: #0079FF !important;
+  }
+`
+
 export function DatePickerField(props: FieldHookConfig<string>) {
   const { setFieldValue } = useFormikContext();
   const [field] = useField(props.name);
@@ -39,13 +51,18 @@ export function DatePickerField(props: FieldHookConfig<string>) {
 
   return (
     <div className="flex flex-col lg:flex-row items-start">
+      <style>{css}</style>
       {/* Select day */}
       <DayPicker
         {...props}
         {...field}
         mode="single"
+        required
         selected={(field.value && new Date(field.value)) || undefined}
         onSelect={handleSelectDate}
+        modifiersClassNames={{
+          selected: 'my-selected'
+        }}
         footer={footer}
       />
 

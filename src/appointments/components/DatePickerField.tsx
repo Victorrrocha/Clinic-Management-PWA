@@ -1,4 +1,4 @@
-import { FieldHookConfig, useField, useFormikContext } from "formik";
+import { FieldHookConfig, FormikContextType, useField, useFormikContext } from "formik";
 import { useEffect, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { AppointmentHour } from "../../components/styled/AppointmentHour";
@@ -21,25 +21,23 @@ const css = `
 `
 
 export function DatePickerField(props: FieldHookConfig<string>) {
+  // console.log(" DAte field")
   const dispatch = useAppDispatch();
 
   const appointmentsCreated = useAppSelector(selectAllAppointments);
   const appointmentStatus = useAppSelector(getAppointmentStatus);
-  
-  const { setFieldValue } = useFormikContext();
-  const [field] = useField(props.name);
 
-  const [selected, setSelected] = useState<Date>();
+  const { setFieldValue, values } = useFormikContext() as { setFieldValue: Function, values: IAppointment};
+  const [field] = useField(props.name);
+  const selected = new Date(field.value);
+
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
-  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedTime, setSelectedTime] = useState(values.hour);
 
   useEffect(() => {
-    if (appointmentStatus === "idle") {
-      dispatch(fetchAppointments())
-    }
-  }, [dispatch, fetchAppointments])
+    setSelectedTime(values.hour);
+  }, [values.hour])
 
-  // select all 
   let footer = <p>Please pick a day.</p>;
 
   if (selected) {
@@ -61,24 +59,28 @@ export function DatePickerField(props: FieldHookConfig<string>) {
   }
 
   const handleSelectDate = (day: Date | undefined) => {
-    if (day) {
+    if (day && (selected && !isSameDay(day, selected) || !selected) ) {
+      setSelectedTime("");
       setFieldValue(field.name, day?.toLocaleString());
+      setFieldValue("hour", null);
       setAppointments(getAppointmentsFor(day));
-      setSelected(day);
-      console.log(day?.toLocaleString());
     }
   };
 
   const handleAppointmentHour = (hour: string) => {
     if (selectedTime !== hour) {
       setSelectedTime(hour);
-    } else {
-      setSelectedTime(""); // form should be invalid
     }
     selected?.setHours(+hour);
-    console.log(selected);
     setFieldValue(field.name, selected?.toLocaleString());
+    setFieldValue("hour", hour);
   };
+
+  useEffect(() => {
+    if (appointmentStatus === "idle") {
+      dispatch(fetchAppointments())
+    }
+  }, [dispatch, fetchAppointments])
 
   const availableSlots = (
     Array.from({ length: 8 }, (_, i) => i + 8).map((hour) => {
@@ -106,7 +108,7 @@ export function DatePickerField(props: FieldHookConfig<string>) {
         {...field}
         mode="single"
         required
-        selected={(field.value && new Date(field.value)) || undefined}
+        selected={selected || undefined}
         onSelect={handleSelectDate}
         modifiersClassNames={{
           selected: 'my-selected'
@@ -118,7 +120,7 @@ export function DatePickerField(props: FieldHookConfig<string>) {
       <div className="flex flex-col gap-y-2 w-[200px]">
         <h3 className="text-lg font-medium">Available Hours: </h3>
         <div className="flex gap-1 flex-wrap">
-          {selected ? availableSlots : ""}
+          {field.value ? availableSlots : ""}
         </div>
       </div>
     </div>

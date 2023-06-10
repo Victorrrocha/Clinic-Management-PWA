@@ -13,6 +13,7 @@ import { IPatient } from "../interfaces/IPatient";
 import { PageHeader } from "../components/PageHeader";
 import { DatePickerField } from "./components/DatePickerField";
 import { IAppointment } from "../interfaces/IAppointment";
+import { useNavigate } from "react-router";
 
 export const initialForm: IAppointment = {
   id: "",
@@ -21,27 +22,38 @@ export const initialForm: IAppointment = {
   email: "",
   phoneNumber: "",
   date: "",
+  hour: ""
 };
 
 function NewAppointment() {
   const [patients, setPatients] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState<IPatient>();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = async (values: IAppointment, actions: any) => {
     if (selectedPatient) {
       values.patientId = selectedPatient.id;
     }
-    await dispatch(addNewAppointment(values)).unwrap();
-    actions.setSubmitting(false);
-    actions.resetForm(initialForm);
-    setSelectedPatient(undefined);
+    await dispatch(addNewAppointment(values)).unwrap()
+      .then(() => {
+        actions.setSubmitting(false);
+        actions.resetForm(initialForm);
+        setSelectedPatient(undefined);
+        navigate("/new-appointment");
+      })
   };
 
   const validate = (values: any) => {
     const errors: any = {};
     if (!values.name) {
       errors.name = "Name is required";
+    }
+
+    if (values.email.length <= 0 && values.phoneNumber.length <= 0) {
+      errors.contact = "Need to provide a contact information"
+      errors.email = "Invalid email address";
+      errors.phoneNumber = "Invalid phone number";
     }
 
     if (
@@ -56,10 +68,12 @@ function NewAppointment() {
     }
 
     if (!values.date) {
-      // validate if a time was set
       errors.date = "Select a date";
     }
 
+    if (!values.hour) {
+      errors.hour = "Select an hour";
+    }
     return errors;
   };
 
@@ -89,9 +103,6 @@ function NewAppointment() {
           validate={validate}
         >
           {(props: FormikProps<any>) => {
-            if (props.isSubmitting) {
-              return <p>Is Submitting</p>;
-            }
             return (
               <Form onSubmit={props.handleSubmit}>
                 <div className={styles.formSection}>
@@ -112,13 +123,9 @@ function NewAppointment() {
                 </div>
                 <div className={styles.formSection}>
                   <p className={styles.formSectionTitle}>Contact</p>
-                  {props.submitCount > 0 &&
-                    props.values.email === "" &&
-                    props.values.phoneNumber === "" && (
-                      <p className={styles.errorMessage} role="alert">
-                        Inform at least one
-                      </p>
-                    )}
+                  <small role="alert">
+                    Inform at least one
+                  </small>
                   <InputField
                     name="email"
                     placeholder="E-mail"
@@ -128,18 +135,19 @@ function NewAppointment() {
                   <InputField
                     name="phoneNumber"
                     placeholder="Phone Number"
-                    validateImmediately={true}
                     selectedPatient={selectedPatient}
                   />
                 </div>
 
                 <div>
                   <p className={styles.formSectionTitle}>Date</p>
-                  <DatePickerField name="date" />
+                  <DatePickerField name="date"/>
                 </div>
 
-                <button className="btn action" type="submit">
-                  {!selectedPatient ? 'Create Patient and Appointment' : 'Create Appointment'}
+                <button 
+                  className="btn action" 
+                  disabled={(!props.dirty || !props.isValid)} type="submit">
+                  Submit
                 </button>
 
                 <SearchPatients searchResponse={handleSearchResponse} />

@@ -74,3 +74,10 @@ a {
   font-size: 1rem;
 }
 
+.btn:disabled {
+  background-color: #cfcfcf;
+}
+
+.btn:disabled:hover {
+  transform: none;
+}

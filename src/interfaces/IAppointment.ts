@@ -5,4 +5,5 @@ export interface IAppointment {
   email?: string,
   phoneNumber?: string,
   date: string,
+  hour: string
 }

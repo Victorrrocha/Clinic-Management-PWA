@@ -1,14 +1,14 @@
 import { useFormikContext } from "formik";
 import { useEffect } from "react";
 import { queryPatients } from "../services/patients";
-import { IAppointmentForm } from "./NewAppointment";
+import { IAppointment } from "../interfaces/IAppointment";
 
 export const SearchPatients = ({
   searchResponse,
 }: {
   searchResponse: Function;
 }) => {
-  const { values } = useFormikContext<IAppointmentForm>();
+  const { values } = useFormikContext<IAppointment>();
   const { name } = values;
 
   useEffect(() => {

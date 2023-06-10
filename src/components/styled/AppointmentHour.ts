@@ -5,6 +5,7 @@ export const AppointmentHour = styled.span<{ $selected?: boolean, $unavailable?:
   border: 1px solid #acbcff;
   padding: 5px 10px;
   border-radius: 20px;
+  user-select: none;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   cursor: ${props => props.$unavailable ? "not-allowed" : "pointer"};
   height: fit-content;

@@ -16,7 +16,7 @@ function PatientsPage() {
 
     return (
         <div className="section-wrapper">
-            <PageHeader title="Patients Page" />
+            <PageHeader title="Patients" />
 
             <div className="main">
                 <ListContainer>

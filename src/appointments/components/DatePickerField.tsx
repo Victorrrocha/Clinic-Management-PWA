@@ -1,4 +1,4 @@
-import { FieldHookConfig, FormikContextType, useField, useFormikContext } from "formik";
+import { FieldHookConfig, useField, useFormikContext } from "formik";
 import { useEffect, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { AppointmentHour } from "../../components/styled/AppointmentHour";
@@ -21,7 +21,6 @@ const css = `
 `
 
 export function DatePickerField(props: FieldHookConfig<string>) {
-  // console.log(" DAte field")
   const dispatch = useAppDispatch();
 
   const appointmentsCreated = useAppSelector(selectAllAppointments);
@@ -113,7 +112,7 @@ export function DatePickerField(props: FieldHookConfig<string>) {
         modifiersClassNames={{
           selected: 'my-selected'
         }}
-        footer={footer}
+        // footer={footer}
       />
 
       {/* select time */}

@@ -1,7 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk, nanoid } from '@reduxjs/toolkit'
 import { RootState } from '../app/store'
 import { IAppointment } from '../interfaces/IAppointment'
+import { IPatient } from '../interfaces/IPatient'
 import { getAppointments, postAppointment } from '../services/appointments'
+import { createNewPatient } from '../services/patients'
+import { getRandomPastelColor } from '../utils/utils'
 
 interface AppointmentState {
   appointments: IAppointment[],
@@ -18,9 +21,28 @@ const initialState: AppointmentState = {
 export const addNewAppointment = createAsyncThunk(
   'appointments/addNewAppointment',
   async (appointment: IAppointment) => {
-    appointment.id = nanoid()
-    const response = await postAppointment(appointment)
-    return response.data
+    // check if patient is new
+    if (!appointment.patientId) {
+      appointment.patientId = nanoid();
+      const {patientId, name, email, phoneNumber} = appointment;
+      const patient: IPatient = {
+        id: patientId,
+        name,
+        email,
+        phone: phoneNumber,
+        iconColor: getRandomPastelColor()
+      } 
+      return await createNewPatient(patient)
+        .then(async () => {
+          appointment.id = nanoid()
+          const response = await postAppointment(appointment)
+          return response.data
+        })
+    } else {
+      appointment.id = nanoid()
+      const response = await postAppointment(appointment)
+      return response.data
+    }
   }
 )
 

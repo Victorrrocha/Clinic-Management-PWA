@@ -81,3 +81,11 @@ a {
 .btn:disabled:hover {
   transform: none;
 }
+
+.nav-active {
+  color: #E76161;
+}
+
+.nav-inactive {
+  color: #20262E;
+}

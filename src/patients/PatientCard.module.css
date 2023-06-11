@@ -5,6 +5,7 @@
     column-gap: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .patientIcon {
@@ -22,13 +23,21 @@
 }
 
 .name {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
-    flex: 1;
     white-space: nowrap;
 }
 
 .infoContainer {
     display: flex;
     flex-direction: column;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
+}
+
+.infoContainer p {
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

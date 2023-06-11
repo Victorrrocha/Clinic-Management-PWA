@@ -17,7 +17,7 @@ export function PatientCard({patient, onSelecting}: { patient: Patient, onSelect
             .join('')
             .toUpperCase();
 
-        return initials;
+        return initials[0] + initials[initials.length - 1];
     }
 
     const handleSeleting = () => {

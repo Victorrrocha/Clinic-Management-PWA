@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   left: 0;
-  background-color: #537188;
+  background-color: #EEE3CB;
   min-width: 250px;
   height: 100vh;
   display: flex;
@@ -18,5 +18,5 @@
   display: flex;
   flex-direction: column;
   row-gap: 15px;
-  color: #000;
+  color: #EEE3CB;
 }

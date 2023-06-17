@@ -1,0 +1,34 @@
+.container {
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  border: 1px solid #79E0EE;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.checkmark:hover {
+  background-color: #79e0ee27;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #79E0EE;
+  /* font-weight: 700; */
+  color: rgb(255, 255, 255);
+}

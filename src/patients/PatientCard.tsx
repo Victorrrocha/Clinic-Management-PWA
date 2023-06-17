@@ -27,7 +27,7 @@ export function PatientCard({patient, onSelecting}: { patient: Patient, onSelect
     }
 
     return(
-        <div className={`btn ${styles.patientCard}`} onClick={handleSeleting}>
+        <div className={`card ${styles.patientCard}`} onClick={handleSeleting}>
             <div className={styles.patientIcon} style={{ backgroundColor: patient.iconColor}}>{getInitials(patient.name)}</div>
 
             <div className={styles.infoContainer}>

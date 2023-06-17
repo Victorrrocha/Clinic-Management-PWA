@@ -4,6 +4,7 @@ import { IPatient } from "../../interfaces/IPatient";
 import { useEffect } from "react";
 import { initialForm } from "../../appointments/NewAppointment";
 
+// Custom Input field for Formik form
 const InputField = (props: FieldHookConfig<string> & {label?: string, validateImmediately?: boolean, selectedPatient?: IPatient}) => {
     const [field, meta] = useField(props.name);
 

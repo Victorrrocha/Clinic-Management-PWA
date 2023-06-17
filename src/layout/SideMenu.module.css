@@ -1,15 +1,24 @@
-.nav {
+.header {
   position: sticky;
   top: 0;
   left: 0;
-  background-color: #EEE3CB;
+  background: #c6edff;
+  background: -moz-linear-gradient(to bottom, #c6edff 0%, #a3c6ff 100%);
+  background: -webkit-linear-gradient(to bottom, #c6edff 0%, #a3c6ff 100%);
+  background: linear-gradient(to bottom, #c6edff 0%, #a3c6ff 100%);
   min-width: 250px;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  box-shadow: rgba(100, 100, 100, 0.25) 1.95px 0 2.6px;
+  padding: 20px 0;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: rgba(100, 100, 100, 0.25) 1.95px 0 2.6px;
 }
 
 .ul {
@@ -18,5 +27,4 @@
   display: flex;
   flex-direction: column;
   row-gap: 15px;
-  color: #EEE3CB;
 }

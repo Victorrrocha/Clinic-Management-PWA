@@ -143,12 +143,16 @@ function NewAppointment() {
                   <p className={styles.formSectionTitle}>Date</p>
                   <DatePickerField name="date"/>
                 </div>
+                
+                <div className="btn-row">
+                  <button 
+                    className="btn action" 
+                    disabled={(!props.dirty || !props.isValid)} type="submit">
+                    Submit
+                  </button>
 
-                <button 
-                  className="btn action" 
-                  disabled={(!props.dirty || !props.isValid)} type="submit">
-                  Submit
-                </button>
+                  <button className="btn discard" disabled={(!props.dirty)}>Clear</button>
+                </div>
 
                 <SearchPatients searchResponse={handleSearchResponse} />
               </Form>

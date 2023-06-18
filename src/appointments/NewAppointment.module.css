@@ -1,5 +1,4 @@
 section {
-    width: 100%;
     display: grid;
     grid-template-columns: [col-start] 1fr [col-1] 1fr [col-end];
     grid-template-rows: [row-start] auto [row-1] 1fr [row-end];
@@ -42,7 +41,7 @@ section {
 form {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    /* height: 100%; */
     row-gap: 20px;
 }
 

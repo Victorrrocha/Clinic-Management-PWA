@@ -9,6 +9,10 @@
   padding: 0;
 }
 
+h1 {
+  font-size: 24px;
+}
+
 a {
   text-decoration: none;
   color: #000;
@@ -16,7 +20,6 @@ a {
 
 .section-wrapper {
   margin-left: 3rem;
-  width: 100%;
   max-width: 1000px;
   padding: 1rem 2rem;
   flex: 1;
@@ -49,8 +52,8 @@ a {
 }
 
 .btn {
-  max-width: 300px;
-  width: 100%;
+  max-width: 150px;
+  width: 90%;
   padding: 10px 15px;
   border: none;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -59,33 +62,54 @@ a {
   transition: all 100ms ease-in;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-}
-
-.btn:focus {
-  transform: translateY(0px);
+.btn:active {
+  transform: translateY(2px);
 }
 
 .btn.action {
   width: 100%;
-  background-color: #19A7CE;
+  background-color: #1F8A70;
   color: white;
   font-size: 1rem;
 }
 
+.btn.discard {
+  background-color: #DDE6ED;
+}
+
 .btn:disabled {
   background-color: #cfcfcf;
+  color: white;
+  box-shadow: none;
 }
 
 .btn:disabled:hover {
   transform: none;
 }
 
-.nav-active {
-  color: #E76161;
+.btn-row {
+  display: flex;
+  justify-content: start;
+  column-gap: 15px;
 }
 
-.nav-inactive {
-  color: #20262E;
+.nav-item {
+  display: block;
+  color: #242424;
+  width: 95%;
+  margin: 0 auto;
+  border-radius: 15px;
+  padding: 5px;
+  padding-left: 10px;
+  border: 1px solid transparent;
+  transition: all .25s ease-in-out;
+}
+
+.nav-active {
+  background-color: white;
+}
+
+.nav-inactive:hover {
+  background-color: rgba(255, 255, 255, .2);
+  border: 1px solid #fff;
 }

@@ -9,6 +9,7 @@ import Index from './layout/Index'
 import PatientsPage from './patients/PatientsPage'
 import { Provider } from 'react-redux'
 import { store } from './app/store'
+import { Settings } from './settings/Settings'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: 'patients',
         element: <PatientsPage />
+      },
+      {
+        path: 'settings',
+        element: <Settings />
       }
     ]
   }

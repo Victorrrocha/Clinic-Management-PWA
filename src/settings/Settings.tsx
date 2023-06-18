@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { FormInput } from "../components/FormInput/FormInput";
 import { TextCheckbox } from "../components/TextCheckbox/TextCheckbox";
+import { TimePicker } from 'antd';
 import _ from 'lodash';
+import { TextRadioGroup } from "../components/TextRadioGroup/TextRadioGroup";
 
 interface Values  {
   name: string;
@@ -50,6 +52,25 @@ const workDays: WorkDays[] = [
   }
 ]
 
+const options = [
+    {
+      title: '45 min',
+      value: '45'
+    },
+    {
+      title: '60 min',
+      value: '60'
+    },
+    {
+      title: '90 min',
+      value: '90'
+    },
+    {
+      title: 'Custom',
+      value: 'custom'
+    },
+  ]
+
 const initialValues: Values = {
   name: "",
   clinicName: "",
@@ -58,7 +79,7 @@ const initialValues: Values = {
   workSchedule: workDays,
   startTime: "",
   endTime: "",
-  appointmentDuration: ""
+  appointmentDuration: "45"
 }
 
 const textFormFields = [
@@ -96,7 +117,6 @@ export function Settings() {
   }
 
   const handleWorkDays = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
     setSettings((value: Values) => {
       const day = e.target.name;
       const checked = e.target.checked;
@@ -108,6 +128,16 @@ export function Settings() {
       newValue.workSchedule[dayIndex].checked = !!checked;
 
       return newValue;
+    })
+  }
+
+  const handleAppointmentDuration = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSettings((value: Values) => {
+      let selected = e.target.name;
+      if (selected === 'custom') {
+        selected = '30';
+      }
+      return {...value, appointmentDuration: selected}
     })
   }
 
@@ -123,11 +153,18 @@ export function Settings() {
           <p className="bg-primary-light py-1 px-2 ml-5 text-base">Update your credentials and your clinic's definitions</p>
         </div>
 
-        <div>
-          <form className="pl-5 mt-5" onSubmit={submitHandler}>
-            {textFormFields.map(field => {
-              return <FormInput key={field.id} {...field} value={settings[field.name as keyof Values]} onchange={handleFieldUpdate}/>
-            })}
+        <div className="ml-5">
+          <form className="pl-5 flex flex-col gap-y-8" onSubmit={submitHandler}>
+
+            <div className="flex flex-col gap-y-3">
+              <h3 className="text-lg">General Info</h3>
+
+              <div className="ml-4 flex flex-col gap-y-3">
+                {textFormFields.map(field => {
+                  return <FormInput key={field.id} {...field} value={settings[field.name as keyof Values]} onchange={handleFieldUpdate}/>
+                })}
+              </div>
+            </div>
             
             <div className="flex flex-col gap-y-3">
               <h3>Work Schedule</h3>
@@ -144,6 +181,23 @@ export function Settings() {
                 {settings.workSchedule.map((day, index) => {
                   return <TextCheckbox key={index} {...day} onchange={handleWorkDays} />
                 })}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-y-3">
+              <h3>Hours Working</h3>
+
+              <div className="w-[350px] flex">
+                  <TimePicker.RangePicker className="flex-1 rounded-xl" />
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-y-3">
+              <h3>Appointment Duration</h3>
+
+              <div className="flex gap-x-2 items-center">
+                <TextRadioGroup options={options} selected={settings.appointmentDuration} onchange={handleAppointmentDuration}/>
+                <input type="number" min="30" placeholder="...min" className="w-[75px] text-right" disabled={settings.appointmentDuration !== "custom"}/>
               </div>
             </div>
 

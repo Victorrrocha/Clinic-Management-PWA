@@ -6,12 +6,74 @@
   background: -moz-linear-gradient(to bottom, #c6edff 0%, #a3c6ff 100%);
   background: -webkit-linear-gradient(to bottom, #c6edff 0%, #a3c6ff 100%);
   background: linear-gradient(to bottom, #c6edff 0%, #a3c6ff 100%);
-  min-width: 250px;
+  min-width: 280px;
   height: 100vh;
   display: flex;
   flex-direction: column;
   box-shadow: rgba(100, 100, 100, 0.25) 1.95px 0 2.6px;
   padding: 20px 0;
+  position: relative;
+  overflow: hidden;
+  transition: all 250ms ease-in;
+}
+
+.backdrop {
+  display: none;
+  transition: all 250ms ease-in;
+  opacity: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .header {
+    position: fixed;
+    z-index: 10;
+  }
+
+  .header_opened {
+    transform: translateX(0);
+  }
+  
+  .header_closed {
+    position: fixed;
+    transform: translateX(-300px);
+  }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.359);
+    z-index: -1;
+  }
+
+  .backdropOpened {
+    opacity: 1;
+    z-index: 9;
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: 12px;
+    right: 45px;
+  }
+
+  .closeBtn::before,
+  .closeBtn::after {
+    position: absolute;
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 2px;
+    background-color: rgb(57, 57, 57);
+    transform: rotate(45deg);
+  }
+
+  .closeBtn::after {
+    transform: rotate(-45deg);
+  }
 }
 
 .nav {
@@ -27,4 +89,12 @@
   display: flex;
   flex-direction: column;
   row-gap: 15px;
+}
+
+.userPhoto {
+  background-color: #fff;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }

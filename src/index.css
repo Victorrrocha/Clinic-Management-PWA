@@ -19,9 +19,6 @@ a {
 }
 
 .section-wrapper {
-  margin-left: 3rem;
-  max-width: 1000px;
-  padding: 1rem 2rem;
   flex: 1;
 }
 
@@ -30,7 +27,7 @@ a {
   opacity: 0;
 }
 
-.section-wrapper h1 {
+.section-wrapper .header {
   animation: .8s forwards fadeIn;
 }
 
@@ -89,7 +86,7 @@ a {
 
 .btn-row {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   column-gap: 15px;
 }
 

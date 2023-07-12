@@ -1,11 +1,15 @@
 .patientCard {
     display: flex;
+    flex-direction: column;
     padding: 1rem;
     border-radius: 10px;
-    column-gap: 10px;
+    row-gap: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     cursor: pointer;
-    flex-shrink: 0;
+    max-width: 150px;
+    align-items: center;
+    text-align: center;
+    width: 300px;
 }
 
 .patientCard:hover {
@@ -28,11 +32,13 @@ transform: translateY(0px);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     font-size: 1.8rem;
     color: white;
+    flex-shrink: 0;
 }
 
 .name {
+    color: rgb(48, 48, 48);
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 300;
     white-space: nowrap;
 }
 
@@ -42,12 +48,13 @@ transform: translateY(0px);
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    width: 200px;
 }
 
 .infoContainer p {
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
   

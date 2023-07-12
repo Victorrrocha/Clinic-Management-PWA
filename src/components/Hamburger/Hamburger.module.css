@@ -1,0 +1,46 @@
+.hamburgerContainer {
+  padding: 6px;
+  width: fit-content;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  z-index: 9999;
+}
+
+.hamburgerContainer:hover {
+  cursor: pointer;
+}
+
+.hamburger {
+  width: 30px;
+  height: 2px;
+  background-color: rgb(255, 255, 255);
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger::after,
+.hamburger::before {
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 2px;
+  background-color: rgb(255, 255, 255);
+}
+
+.hamburger::after {
+  top: 10px;
+  left: 0;
+}
+
+.hamburger::before {
+  top: -10px;
+  left: 0;
+}
+
+@media screen and (min-width: 901px) {
+  .hamburgerContainer {
+    display: none;
+  }
+}

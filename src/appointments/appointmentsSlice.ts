@@ -84,9 +84,6 @@ const appointmentsSlice = createSlice({
 export const { appointmentCreated } = appointmentsSlice.actions;
 export default appointmentsSlice.reducer
 
-
-// TODO custom selectors
-
 export const selectAllAppointments = (state: RootState) => state.appointments.appointments
 export const getAppointmentStatus = (state: RootState) => state.appointments.status
 export const getAppointmentError = (state: RootState) => state.appointments.error

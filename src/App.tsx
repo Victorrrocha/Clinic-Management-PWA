@@ -8,7 +8,7 @@ function App() {
   return (
     <main>
       <SideMenu />
-      <div className="w-[100%] flex flex-col overflow-x-scroll">
+      <div className="w-[100%] flex flex-col overflow-x-scroll min-h-[100vh]">
           <Outlet />
         <Footer />
       </div>

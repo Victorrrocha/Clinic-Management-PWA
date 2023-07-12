@@ -3,7 +3,7 @@ Clinic Management PWA made with React, Redux, Styled Components, Formik, Tailwin
 
 ![Preview Image](public/calendar.png)
 
-![Preview Image](public/new_appointment.png)
+![Preview Image](public/settings.png)
 
-![Preview Image](public/patients.png)
+![Preview Image](public/sidemenu.png)
 

@@ -130,13 +130,47 @@
       "iconColor": "#f7b359"
     }
   ],
-  "clinic": [
+  "clinics": [
     {
-      "cnpj": "12790745000180",
-      "contact": "95999998888",
-      "location": "",
-      "Description": "",
-      "Permission": ""
+      "id": "12790745000180",
+      "administrator": "Mia Wallace",
+      "clinicName": "NutriWell Clinic",
+      "email": "mia.wallace@email.com",
+      "phoneNumber": "4512324312",
+      "workSchedule": [
+        {
+          "title": "SUN",
+          "checked": false
+        },
+        {
+          "title": "MON",
+          "checked": true
+        },
+        {
+          "title": "TUE",
+          "checked": true
+        },
+        {
+          "title": "WED",
+          "checked": true
+        },
+        {
+          "title": "THU",
+          "checked": true
+        },
+        {
+          "title": "FRI",
+          "checked": true
+        },
+        {
+          "title": "SAT",
+          "checked": false
+        }
+      ],
+      "startTime": "09:00",
+      "endTime": "20:00",
+      "appointmentSelected": "60",
+      "appointmentDuration": "60"
     }
   ]
 }

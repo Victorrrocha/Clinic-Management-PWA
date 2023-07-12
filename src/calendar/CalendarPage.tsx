@@ -1,10 +1,10 @@
-import { PageHeader } from "../components/PageHeader";
+import { HeaderTitle } from "../components/HeaderTitle/HeaderTitle";
 import CalendarComponent from "./CalendarComponent";
 
 function CalendarPage() {
   return (
     <div className="section-wrapper">
-      <PageHeader title="See what's up today" />
+      <HeaderTitle title="Hello There!" subtitle="See what's up for today"/>
       <div className="main">
         <CalendarComponent />
       </div>

@@ -16,11 +16,14 @@
 }
 
 .checkmark {
+  display: inline-block;
   padding: 10px;
   border-radius: 20px;
   font-size: 14px;
   border: 1px solid #79E0EE;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  min-width: 50px;
+  text-align: center;
 }
 
 .checkmark:hover {

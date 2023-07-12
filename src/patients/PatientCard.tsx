@@ -32,8 +32,6 @@ export function PatientCard({patient, onSelecting}: { patient: Patient, onSelect
 
             <div className={styles.infoContainer}>
                 <p className={styles.name}>{patient.name}</p>
-                <p>{patient.email}</p>
-                <p>{patient.phone}</p>
             </div>
         </div>
     )
